@@ -1,0 +1,176 @@
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <title>Intro to Node.js | by Ryan Olds @ryanrolds</title>
+  <meta name="description" content="Introduction to Node.js"/>
+  <meta name="author" content="Ryan R. Olds" />
+  <link href="css/intro.css" rel="stylesheet"/>
+  <link href="js/syntaxhighlighter/styles/shCore.css" type="text/css" rel="stylesheet" />
+  <link href="css/shThemeSlides.css" type="text/css" rel="stylesheet" />
+  <script src="js/syntaxhighlighter/scripts/shCore.js" type="text/javascript"></script>
+  <script src="js/syntaxhighlighter/scripts/shBrushJScript.js" type="text/javascript"></script>
+  <script src="js/syntaxhighlighter/scripts/shBrushPhp.js" type="text/javascript"></script>
+</head>
+<body>
+  <div id="impress">
+    <div id="who" class="step slide" data-x="-1000" data-y="-1500">
+      <div id="logo" class="center">
+        <img src="/images/nodelogo.png"/>
+      </div>
+      <p class="center">It's a collection of event-driven, non-blocking I/O libraries that run on V8,
+        Chrome's Javscript engine.</p>
+      <p>
+    </div>
+    <div id="io" class="step slide" data-x="0" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Non-blocking wat?</h1>
+      <p>Wikipedia defines I/O as:</p>
+        <q>I/O refers to the communication between an information processing system (such as a computer), and the outside world, possibly a human, or another information processing system.</q>
+      <p>Examples of I/O:</p>
+      <ul>
+        <li>Keyboards (input)</li>
+        <li>Disks (input & output)</li>
+        <li>Networking (input & output)</li>
+        <li>CD-ROMs (input)</li>
+      </ul>       
+    </div>
+    <div id="nonblocking" class="step slide" data-x="1000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Blocking vs. Non-blocking</h1>
+      <span>Reading from a file in PHP</span>
+      <pre class="brush: php">// get contents of a file into a string
+$filename = "/usr/local/something.txt";
+$handle = fopen($filename, "r");
+// Blocks, have to wait until the read is done
+$contents = fread($handle, filesize($filename));
+fclose($handle);</pre>
+      <span>Reading from a file in Node.js</span>
+      <pre class="brush: js">var foo = "";
+// Doesn't block
+fs.readFile("/etc/passwd", function (err, data) {
+    if (err) throw err;
+    foo = data;
+});
+foo = "bar"; // This is run before the callback fires</pre>
+    </div>
+    <div id="whynonblocking" class="step slide" data-x="2000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Why non-blocking?</h1>
+      <p>I/O is slow. When the thread blocks, nothing else can happen. It's waiting.</p>
+      <div class="center">
+        <img src="http://blog.mixu.net/files/2011/01/io-cost.png" style="border: 1px solid #D2D8BA"/>
+      </div>
+    </div>
+    <div id="eventloop" class="step slide" data-x="3000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>The Event Loop</h1>
+      <p>Everything runs in parallel, EXCEPT your code. The event loop handles and processes external events and converts them into callback invocations.</p>
+      <div class="center">
+        <img src="http://www.aaronstannard.com/image.axd?picture=nodejs%20for%20dotnet_thumb.png" style="border: 1px solid #D2D8BA"/>
+      </div>
+    </div>
+    <div id="eventdriven" class="step slide" data-x="4000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Event driven</h1>
+      <p>All sorts of events are emitted, everywhere</p>
+      <pre class="brush: js">
+var net = require('net');
+
+function getReponse(callback) {
+  var client = net.connect(8124, function() { //'connect' listener
+    client.write('Hello world!\r\n');
+  });
+
+  client.on('error', function(error) {
+    callback(error); // Send error back
+  });
+
+  client.on('data', function(response) {
+    client.end(); // Closes connection
+    callback(null, data);
+  });
+}
+
+getReponse(function(error, data) {
+  if(error) {
+    // Do something about the error
+  } 
+
+  // Do somethign with the data
+});
+      </pre>
+    </div>    
+    <div id="pros" class="step slide" data-x="5000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Pros</h1>
+      <ul>
+        <li>Single threaded</li>
+        <li>Highly concurrent</li>
+        <li>All libraries non-blocking from the start</li>
+        <li>npm and the module system</li>
+        <li>Runs on *nix(including OS X) and Windows</li>
+        <li>Amazing community</li>
+      </ul>
+    </div>
+    <div id="cons" class="step slide" data-x="6000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Cons</h1>
+      <ul>
+        <li>Single threaded</li>
+        <li>Mature, but relatively new</li>
+        <li>Small parts of core are undergoing change</li>
+      </ul>
+    </div>
+    <div id="whosusingit" class="step slide" data-x="7000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Who uses Node.js?</h1>
+      <div style="text-align:center;">
+        <span><img src="https://si0.twimg.com/a/1327685130/images/logos/logo_twitter_withbird_1000_white_blue.png" class="userlogos"/></span>
+        <span><img src="http://press.linkedin.com/sites/all/themes/presslinkedin/images/LinkedIn_Logo_Web_Reverse_Trans2.png" class="userlogos"/></span>
+        <span><img src="http://www.top10entry.com/wp-content/uploads/2010/12/ebay.png" class="userlogos"/></span>
+        <span><img src="http://i.imgur.com/nhNxR.png" class="userlogos"/></span>
+        <span><img src="http://akcdn.okccdn.com/media/img/template/logo_rev_24.png" class="userlogos"/></span>
+        <span><img src="http://voxer.com/media/images/weblogo.png?494212251011" class="userlogos"/></span>
+        <span><img src="http://i.microsoft.com/global/en-us/homepage/PublishingImages/sprites/microsoft_gray.png" class="userlogos"/></span>
+        <span><img src="http://www.keepoklahomabeautiful.com/Websites/kob/Images/About/Partner%20Logos/Wal-Mart.png" class="userlogos"/></span>
+      </div>
+    </div>
+    <div id="learnmore" class="step slide" data-x="14000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Learn more</h1>
+      <p>Nodejs.org</p>
+      <p>Nodemanual.org</p>
+      <p>HowToNode.org</p>
+      <p>blog.nodejitsu.com</p>
+      <p>debuggable.com/blog</p>
+      <p>Mailing list: http://groups.google.com/group/nodejs</p>
+      <p>IRC: Freenode - #node.js</p>
+    </div>
+    <div id="cons" class="step slide" data-x="6000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Time to get to some code</h1>
+      <p>We're going to create small application </p>
+    </div>
+    <div id="fin" class="step slide" data-x="15000" data-y="-1500">
+      <h1><img class="hex" src="/images/nodehexagon.png"/>Fin</h1>
+      <p style="text-align: center;">
+        <b>Special thanks to CodeChops for providing the space</b>
+      </p>
+      <p style="text-align: center;">
+        These slides at: https://github.com/ryanrolds/introtonodejs
+      </p>
+      <img src="http://www.gravatar.com/avatar/57fb1693ee3a58df392438555e60ebbe.png" style="float:right;border: 1px solid #D2D8BA">
+      <b>Ryan Olds</b><br/>
+      <p style="margin:3px 0 5px 10px;">
+        Lead front-end engineer<br/>
+        Moonshadow Mobile<br/>
+        <br/>
+        email: ryanrolds@gmail.com<br/>
+        GitHub: https://github.com/ryanrolds<br/>
+        Twitter: @ryanrolds
+      </p>
+      <br/>
+      <b>Slides</b><br/>
+      <p style="margin:3px 0 5px 10px;">
+        Impress.js - https://github.com/bartaz/impress.js<br/>
+        SyntaxHighlighter - http://alexgorbatchev.com/SyntaxHighlighter/
+      </p>
+    </div>
+  </div>
+  <script src="js/impress.js"></script>
+  <script type="text/javascript">
+    SyntaxHighlighter.config.toolbar = false;
+    SyntaxHighlighter.all()
+  </script>
+</head>
+<body>

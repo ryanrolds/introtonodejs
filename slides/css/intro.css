@@ -1,0 +1,53 @@
+body {
+    background-color: #33342D;
+    color: #EEE;
+    font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
+}
+
+h1, h2, h3 {
+    color: #D2D8BA;
+    padding-bottom: 5px;
+    border-bottom: 1px solid #D2D8BA;
+}
+
+pre {
+    background-color: #000000;
+}
+
+h1 .hex {
+    height: 24px;
+    margin-right: 10px;
+}
+
+ul {
+    color: #D2D8BA;
+    list-style-image:url('/images/nodehexagon8.png');
+}
+
+q, blockquote {
+    color: #D2D8BA;
+}
+
+#logo {
+    margin-bottom:20px;
+    padding-bottom: 20px;
+    border-bottom: 1px solid #D2D8BA;
+}
+
+.center {
+    text-align: center;
+}
+
+p, span {
+
+}
+
+.slide {
+    width: 600px;
+    height: 400px;
+}
+
+.userlogos {
+     max-width:200px;
+     margin:0 10px 10px 10px;
+}
