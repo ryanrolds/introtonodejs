@@ -4,9 +4,14 @@ body {
     font-family: "Lucida Grande", "Lucida Sans Unicode", "Lucida Sans", Verdana, Tahoma, sans-serif;
 }
 
+.slide-body p:first-child {
+    margin-top: 0px;
+}
+
 h1, h2, h3 {
     color: #D2D8BA;
     padding-bottom: 5px;
+    margin-bottom: 5px;
     border-bottom: 1px solid #D2D8BA;
 }
 
@@ -44,10 +49,27 @@ p, span {
 
 .slide {
     width: 600px;
-    height: 400px;
+    height: 550px;
 }
 
 .userlogos {
      max-width:200px;
      margin:0 10px 10px 10px;
+}
+
+#url {
+    font-weight:bold;
+    color: white;
+}
+
+a {
+    color: white;
+}
+
+a:visited {
+    color: white;
+}
+
+.fallback-message {
+    display: none;
 }
