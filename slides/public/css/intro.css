@@ -34,6 +34,7 @@ q, blockquote {
 }
 
 #logo {
+    margin-top: 100px;
     margin-bottom:20px;
     padding-bottom: 20px;
     border-bottom: 1px solid #D2D8BA;
@@ -70,6 +71,34 @@ a:visited {
     color: white;
 }
 
+.impress-not-supported .fallback-message {
+    display: block;
+}
+
+.impress-not-supported .step {
+    margin: 20px auto;
+    opacity: 1;
+    position: relative;
+}
+
 .fallback-message {
+    padding: 10px 10px 0;
+    font-family: sans-serif;
+    line-height: 1.3;
+    background: none repeat scroll 0 0 #EEDC94;
+    border: 1px solid #E4C652;
+    border-radius: 10px 10px 10px 10px;
+    width: 600px;
+    vertical-align: baseline;
+    margin: 20px auto;
     display: none;
+    color: #000000;
+}
+
+.fallback-message p {
+    border: 0 none;
+    padding: 0;
+    margin: 0;
+    vertical-align: baseline;
+    margin-bottom: 10px;
 }
